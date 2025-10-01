@@ -178,16 +178,12 @@ username: ba20vrmm
 password: db3d7dd4
 
 
-db:
-user : sql_lang_dfsfr1_local
-password: 2b4d45431b14b8
-
 
 FTP user profile
-User: ftp_lang_dfsfr1_local
-Password: f04a64e6ebb468
+User: ftp_lang_dfsgr1_local
+Password: c95c679aeb928
 Database user profile
-User: sql_lang_dfsfr1_
-Password: 2b4d45431b14b8
+User: sql_lang_dfsgr1_
+Password: d53244225f4528
 
 
