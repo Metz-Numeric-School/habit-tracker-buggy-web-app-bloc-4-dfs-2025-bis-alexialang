@@ -39,6 +39,7 @@ class HabitRepository extends AbstractRepository
 
     public function insert(array $data = array())
     {
+        $pdo = $this->getConnection();
         $name = $data['name'];   
         $description = $data['description'];
 
@@ -47,8 +48,9 @@ class HabitRepository extends AbstractRepository
             . $data['user_id'] . ", '" 
             . $name . "', '" 
             . $description . "', NOW())";
-
-        $query = $this->getConnection()->query($sql);
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($sql);
+        $query = $this->getConnection()->query($stmt);
 
         return $this->getConnection()->lastInsertId();
     }

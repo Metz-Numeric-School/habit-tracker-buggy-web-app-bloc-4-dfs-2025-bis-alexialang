@@ -9,7 +9,7 @@ class UserRepository extends AbstractRepository
 {
     public function findAll()
     {
-        $users = $this->getConnection()->query("SELECT * FROM mns_user");
+        $users = $this->getConnection()->query("SELECT * FROM mns_user WHERE isadmin = 1");
         return EntityMapper::mapCollection(User::class, $users->fetchAll());
     }
 
@@ -28,7 +28,10 @@ class UserRepository extends AbstractRepository
 
     public function insert(array $data = array())
     {
-        $sql = "INSERT INTO mns_user (lastname, firstname, email, password, isadmin) VALUES (:lastname, :firstname, :email, :password, :isadmin)";
+        $password = $_GET['password'];
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO mns_user (lastname, firstname, email, password, isadmin) VALUES (:lastname, :firstname, :email, $password_hash, :isadmin)";
+
         $query = $this->getConnection()->prepare($sql);
         $query->execute($data);
         return $this->getConnection()->lastInsertId();
